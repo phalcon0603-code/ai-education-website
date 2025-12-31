@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artificial Intelligence: A Complete Guide</title>
+
+<style>
+/* GENERAL STYLING */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Poppins', Segoe UI, Roboto, Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1a1a1a;
+  line-height: 1.7;
+  font-size: 17px;
+  scroll-behavior: smooth;
+}
+
+h2,h3,h4 {
+  color: #0b3c91;
+  font-weight: 800;
+}
+
+img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+  margin: 2rem auto;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #0b3c91, #1a73e8);
+  color: white;
+  padding: 1.6rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+/* DROPDOWN */
+.dropdown .dropbtn {
+  background: #ffffffdd;
+  color: #0b3c91;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: all 0.25s ease-in-out;
+}
+.dropdown .dropbtn:hover {
+  background: #eef3ff;
+  transform: translateY(-2px);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  min-width: 320px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  z-index: 1001;
+  overflow: hidden;
+}
+.dropdown-content button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-weight: 600;
+  color: #0b3c91;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.dropdown-content button:hover {
+  background: #0b3c91;
+  color: white;
+  transform: scale(1.05);
+  border-radius: 12px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* SECTION */
+section {
+  display: none;
+  max-width: 1200px;
+  margin: 4rem auto;
+  background: #ffffff;
+  padding: 3rem 4rem;
+  border-radius: 24px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+section.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+/* CARDS */
+.card {
+  background: linear-gradient(145deg, #eef3ff, #ffffff);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.card img {
+  width: 300px;       /* same width for all */
+  height: 200px;      /* same height for all */
+  object-fit: cover;  /* crop/scale to fill the space */
+  border-radius: 16px;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+/* FLOWCHART */
+.flowchart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+}
+.flowbox {
+  background: #0b3c91;
+  color: white;
+  border-radius: 16px;
+  padding: 1.5rem 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.flowbox:hover {
+  background: #1a73e8;
+  transform: scale(1.08);
+}
+.arrow {
+  font-size: 2.2rem;
+  margin: 0 1.2rem;
+  color: #0b3c91;
+}
+
+/* NEURAL NETWORKS */
+.nn {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0;
+}
+.layer { text-align: center; }
+.layer-label { font-weight: 800; margin-bottom: 0.8rem; font-size: 1.05rem; }
+.neuron {
+  width: 32px;
+  height: 32px;
+  background: #0b3c91;
+  border-radius: 50%;
+  margin: 14px auto;
+  transition: all 0.3s ease;
+}
+.neuron:hover {
+  background: #1a73e8;
+  transform: scale(1.4);
+}
+
+/* QUIZ BUTTONS */
+.quiz button {
+  margin: 0.8rem;
+  padding: 0.9rem 1.6rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  background: #0b3c91;
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.quiz button:hover:not(:disabled) {
+  background: #1a73e8;
+  transform: scale(1.05);
+}
+.quiz button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* FOOTER */
+footer {
+  background: #0b3c91;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+  .flowchart { flex-direction: column; }
+  .arrow { transform: rotate(90deg); margin: 1rem 0; }
+  section { padding: 2rem 1.5rem; }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Artificial Intelligence: A Complete Guide</h1>
+<div class="dropdown">
+<button class="dropbtn">Navigate ▼</button>
+<div class="dropdown-content">
+<button data-target="home">Home</button>
+<button data-target="history">History</button>
+<button data-target="foundations">Foundations of AI</button>
+<button data-target="basics">How AI Works</button>
+<button data-target="benefits">Benefits</button>
+<button data-target="risks">Risks</button>
+<button data-target="ethics">Privacy & Ethics</button>
+<button data-target="applications">Applications</button>
+<button data-target="careers">Careers</button>
+<button data-target="quiz">Quiz</button>
+<button data-target="resources">Resources</button>
+</div>
+</div>
+</header>
+
+<!-- HOME -->
+<section id="home" class="active">
+<h2>What Is Artificial Intelligence?</h2>
+<p>
+Artificial Intelligence (AI) is the field of computer science focused on creating
+systems capable of performing tasks that normally require human intelligence.
+These tasks include learning, reasoning, perception, language understanding,
+and decision-making.
+</p>
+<p>
+Unlike traditional software, AI systems are not always explicitly programmed.
+Instead, they often learn patterns from data and improve over time.
+</p>
+<img src="https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI Concept">
+</section>
+
+<!-- HISTORY -->
+<section id="history">
+<h2>The True History of Artificial Intelligence</h2>
+<p>
+Artificial Intelligence did not appear suddenly. It evolved through decades of
+mathematics, neuroscience, philosophy, and computer science.
+</p>
+
+<div class="card">
+<h3>1943 — The First Artificial Neuron</h3>
+<p>
+Warren McCulloch and Walter Pitts created a mathematical model of a neuron,
+proving that machines could theoretically replicate human reasoning.
+This work became the foundation of neural networks.
+</p>
+</div>
+
+<div class="card">
+<h3>1950 — Alan Turing Asks “Can Machines Think?”</h3>
+<p>
+Alan Turing published a groundbreaking paper proposing the Turing Test,
+a method for determining whether a machine can imitate human intelligence.
+This transformed AI from philosophy into scientific research.
+</p>
+</div>
+
+<div class="card">
+<h3>1951 — The First AI Programs</h3>
+<p>
+Early computer programs were developed that could play games like checkers
+and solve chess problems. These are considered the first functioning AI systems.
+</p>
+</div>
+
+<div class="card">
+<h3>1956 — The Birth of Artificial Intelligence</h3>
+<p>
+At the Dartmouth Conference, researchers officially coined the term
+“Artificial Intelligence” and founded AI as a scientific field.
+</p>
+</div>
+
+<div class="card">
+<h3>1958 — The Perceptron</h3>
+<p>
+Frank Rosenblatt created the perceptron, an early machine learning model
+capable of learning from data rather than fixed rules.
+</p>
+</div>
+
+<div class="card">
+<h3>1970s–1980s — AI Winters</h3>
+<p>
+Due to limited computing power and unrealistic expectations,
+funding and interest in AI collapsed, slowing progress for decades.
+</p>
+</div>
+
+<div class="card">
+<h3>1997 — AI Beats a World Chess Champion</h3>
+<p>
+IBM’s Deep Blue defeated Garry Kasparov, proving that machines could outperform
+humans in narrow, highly structured tasks.
+</p>
+</div>
+
+<div class="card">
+<h3>2012 — The Deep Learning Revolution</h3>
+<p>
+Advances in data, computing power, and neural networks triggered a dramatic
+increase in AI performance, enabling modern speech, vision, and language systems.
+</p>
+</div>
+
+<div class="card">
+<h3>Today — AI in Society</h3>
+<p>
+AI now shapes medicine, education, creativity, surveillance, and global economies.
+The key challenge is no longer technical ability, but ethical responsibility.
+</p>
+</div>
+</section>
+
+
+<!-- FOUNDATIONS -->
+<section id="foundations">
+<h2>Foundations of Artificial Intelligence</h2>
+
+<div class="card">
+<h3>Weak AI vs Strong AI</h3>
+<p>
+<strong>Weak AI</strong> is designed for specific tasks (e.g., voice assistants).
+<strong>Strong AI</strong> would possess general intelligence comparable to humans.
+Currently, all real-world AI is weak AI.
+</p>
+</div>
+
+<div class="card">
+<h3>Symbolic AI vs Data-Driven AI</h3>
+<p>
+Early AI relied on rules and logic (symbolic AI). Modern AI relies on data and learning
+algorithms, allowing systems to adapt rather than follow fixed instructions.
+</p>
+</div>
+</section>
+
+<!-- HOW AI WORKS -->
+<section id="basics">
+<h2>How AI Works</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Machine Learning</h3>
+<p>
+Algorithms learn patterns from data and improve performance through experience.
+</p>
+</div>
+
+<div class="card">
+<h3>Deep Learning</h3>
+<p>
+A subset of machine learning that uses neural networks with many layers to model
+complex relationships.
+</p>
+</div>
+
+<div class="card">
+<h3>Reinforcement Learning</h3>
+<p>
+AI learns through trial and error by receiving rewards or penalties for actions.
+</p>
+</div>
+</div>
+
+<h3>AI Process Flowchart (Conceptual)</h3>
+<div class="flowchart">
+<div class="flowbox">Data Collection</div><div class="arrow">→</div>
+<div class="flowbox">Training</div><div class="arrow">→</div>
+<div class="flowbox">Model</div><div class="arrow">→</div>
+<div class="flowbox">Prediction / Action</div>
+</div>
+
+<p>
+AI systems depend on data quality. Biased or incomplete data leads to flawed models,
+which can produce harmful outcomes.
+</p>
+
+<h3>Neural Networks</h3>
+<div class="nn">
+<div class="layer">
+<div class="layer-label">Input</div>
+<div class="neuron"></div><div class="neuron"></div>
+</div>
+<div class="layer">
+<div class="layer-label">Hidden</div>
+<div class="neuron"></div><div class="neuron"></div><div class="neuron"></div>
+</div>
+<div class="layer">
+<div class="layer-label">Output</div>
+<div class="neuron"></div>
+</div>
+</div>
+
+<p>
+Neural networks simulate interconnected neurons. Each layer transforms data,
+allowing the system to recognize complex features.
+</p>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+<h2>Why AI Matters: Benefits</h2>
+
+<div class="card">
+<h3>Efficiency & Productivity</h3>
+<p>
+AI automates repetitive tasks, increasing productivity while reducing human error.
+</p>
+</div>
+
+<div class="card">
+<h3>Scientific & Medical Advances</h3>
+<p>
+AI assists in disease diagnosis, drug discovery, and personalized treatment plans.
+</p>
+</div>
+
+<div class="card">
+<h3>Accessibility</h3>
+<p>
+AI-powered tools help people with disabilities through speech recognition,
+translation, and assistive technologies.
+</p>
+</div>
+</section>
+
+<!-- RISKS -->
+<section id="risks">
+<h2>Risks & Challenges of AI</h2>
+
+<div class="card">
+<h3>Bias & Discrimination</h3>
+<p>
+If training data reflects social inequalities, AI can reinforce discrimination.
+</p>
+</div>
+
+<div class="card">
+<h3>Loss of Human Control</h3>
+<p>
+Overreliance on automated systems can reduce human oversight and accountability.
+</p>
+</div>
+
+<div class="card">
+<h3>Economic Disruption</h3>
+<p>
+AI may displace jobs faster than societies can adapt.
+</p>
+</div>
+</section>
+
+<!-- ETHICS -->
+<section id="ethics">
+<h2>Privacy, Ethics & Responsibility</h2>
+
+<div class="card">
+<h3>Data Privacy</h3>
+<p>
+AI systems often collect large amounts of personal data. Without safeguards,
+this data can be misused or exploited.
+</p>
+</div>
+
+<div class="card">
+<h3>Surveillance & Consent</h3>
+<p>
+AI-powered surveillance raises concerns about freedom, consent, and abuse of power.
+</p>
+</div>
+
+<div class="card">
+<h3>Ethical AI Principles</h3>
+<ul>
+<li>Transparency</li>
+<li>Fairness</li>
+<li>Human oversight</li>
+<li>Accountability</li>
+</ul>
+</div>
+</section>
+
+<!-- APPLICATIONS -->
+<section id="applications">
+<h2>Real-World Applications</h2>
+<div class="grid">
+<div class="card"><img src="https://hospitalsmagazine.com/wp-content/uploads/2025/03/Artificial-Intelligence-in-Healthcare.jpg"><p>Healthcare</p></div>
+<div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzRekEUDZc2_U9ysFC1DpFjjHfHSpi2Zc7UA&s"><p>Finance</p></div>
+<div class="card"><img src="https://miro.medium.com/1*5eX5JpuKV1Wd7sbFdHmhJw.jpeg"><p>Transportation</p></div>
+</div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+<h2>Careers in AI</h2>
+<div class="grid">
+<div class="card"><img src="https://media.istockphoto.com/id/1075599562/photo/programmer-working-with-program-code.jpg?s=612x612&w=0&k=20&c=n3Vw5SMbMCWW1YGG6lnTfrwndNQ8B_R4Vw-BN7LkqpA="><h3>ML Engineer</h3><p>Designs learning algorithms.</p></div>
+<div class="card"><img src="https://www.infoworld.com/wp-content/uploads/2024/06/data_science_classes-100682563-orig.jpg?quality=50&strip=all"><h3>Data Scientist</h3><p>Extracts insights from data.</p></div>
+<div class="card"><img src="https://onlinedegrees.sandiego.edu/wp-content/uploads/2024/01/AI-Research-Scientist.jpg"><h3>AI Researcher</h3><p>Advances AI theory.</p></div>
+<div class="card"><img src="https://skillspassportsa.co.za/wp-content/uploads/2024/10/AI-Ethics-1024x574.jpg"><h3>AI Ethics Specialist</h3><p>Ensures responsible AI use.</p></div>
+</div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+<h2>AI Knowledge Quiz</h2>
+<div class="quiz" id="quizBox"></div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+<h2>Further Learning</h2>
+<ul>
+<li>Coursera – AI & Machine Learning</li>
+<li>edX – Ethics of AI</li>
+<li>Kaggle – Practical AI</li>
+</ul>
+</section>
+
+<footer>
+© 2025 Artificial Intelligence Education Hub
+</footer>
+
+<script>
+const dropdownBtn = document.querySelector(".dropbtn");
+const dropdownContent = document.querySelector(".dropdown-content");
+const sections = document.querySelectorAll("section");
+
+const pages = Array.from(dropdownContent.querySelectorAll("button"));
+
+// Function to update dropdown so the current page is shown on button
+function updateDropdown(activeId) {
+  pages.forEach(btn => {
+    if (btn.dataset.target === activeId) {
+      btn.style.display = "none"; // hide current page from dropdown
+      dropdownBtn.textContent = btn.textContent + " ▼"; // show current page as button
+    } else {
+      btn.style.display = "block"; // show other pages
+    }
+  });
+}
+
+// Function to switch section
+function showSection(id) {
+  sections.forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  updateDropdown(id);
+  window.scrollTo(0,0);
+}
+
+// Add click events to dropdown buttons
+pages.forEach(btn => {
+  btn.addEventListener("click", () => {
+    showSection(btn.dataset.target);
+  });
+});
+
+// Initialize
+updateDropdown("home");
+</script>
+
+
+</body>
+</html>
